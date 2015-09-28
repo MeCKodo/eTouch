@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>tap手势测试demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="format-detection" content="telephone=no" />
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+		<script src="etouch.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			 #box {
+			 	width: 100%;
+			 	height: 400px;
+			 }
+			 ul {
+			 	width: 100%;
+			 	list-style: none;
+			 }
+			 li {
+			 	    height: 70px;
+				    line-height: 70px;
+				    margin: 10px 0;
+				    background: #C2DEEC;
+			 }
+			 #pox {
+			 	width: 200px;
+			 	height: 200px;
+			 	background: blue;
+			 	color: #fff;
+			 }
+		</style>
+	</head>
+	<body>
+		<button id="btn">我是新增的dom测试事件代理</button>
+		<script type="text/javascript">
+			$("#btn").on('click',function(e) {
+				var html = '<li class="dele">66666666666</li>';
+				$("#box ul").append(html);
+			})
+		</script>
+		<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=524580860&site=qq&menu=yes">12313123122</a>  
+		<div id="pox">
+			来这里滑滑试试
+		</div>
+		<div id="p">
+			
+		</div>
+		<div id="box">
+			<ul>
+				<li id="li1">我是测试事件代理和绑定的1</li>
+				<li id="li2">我是测试事件代理和绑定的2</li>
+				<li id="li3">我是测试事件代理和绑定的3</li>
+				<li id="li4">我是测试事件代理和绑定的4</li>
+				<li id="li5"><span>我是测试事件代理和绑定的5</span></li>
+			</ul>
+			<div class="classA">
+				<div class="classB">
+					<ul>
+						<li class="item">
+							<p>
+								<span>我是item下的span</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+			//第一个参数为代理元素 必须为id 第二个参数为触发对象 第三个参数是回调	
+			etouch('#box','li',function(e,touchObj) {
+				//这里可以实时监听滑动距离，tap的回调也写这里即可。
+				console.log('------------li---------');
+			}).on('left',function(e) {
+				console.log('li-------的左滑回调');
+			})
+			
+			etouch('#pox',function(e,touchObj) {
+				e.preventDefault();
+				console.log(e);
+			}).on('left',function(e) {
+				e.preventDefault();
+				console.log(e);
+				console.log('Left');
+			});
+		</script>
+	</body>
+</html>

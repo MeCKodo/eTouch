@@ -2,11 +2,11 @@
 
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
 
-### 举个粒子
+#### 举个粒子
 
 ```javascript
 //事件代理例子 !!!!!第一个参数仅支持id!!!!!!
-touchModule('#box','li',function(e,touchObj) {
+etouch('#box','li',function(e,touchObj) {
   // 以下数据是实时监听的，tap的回调可写在这。
  	console.log(this.innerHTML); //this为dom对象
   	console.log(touchObj);//滑动返回对象
@@ -29,7 +29,7 @@ touchModule('#box','li',function(e,touchObj) {
 });
    
 //直接事件绑定
- touchModule('li',function(e,touchObj) {
+ etouch('li',function(e,touchObj) {
  	console.log(this,e,touchObj);
  }).on('left',function() {
  
