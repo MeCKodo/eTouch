@@ -3,6 +3,7 @@
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
 (从forchangejs里提取的手势模块)
 
+
 #### 举个粒子
 
 ```javascript
@@ -36,4 +37,17 @@ etouch('#box','li',function(e,touchObj) {
  
 })
  //  e为事件对象，touchObj为触摸返回对象
+```
+
+还支持 CMD 和 AMD 
+```javascript
+
+require(['etouch'],function(etouch) {
+	
+	new etouch('#box',function(e) {
+		console.log('box');
+	});
+	
+})
+
 ```
