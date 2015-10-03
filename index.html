@@ -54,16 +54,16 @@
 		<p id="boxConsole"></p>
 <pre class="language-javascript">
 <code>
-etouch("#box",function(e,touchobj) {
-	e.preventDefault(); //阻止浏览器默认事件 
-	var log = document.getElementById("boxConsole")
-	if (touchobj.status == 'tap') {
+etouch("#box",function(e,type) {
+	//阻止浏览器默认事件  会把浏览器滑动事件也阻止
+	e.preventDefault(); 
+	var log = document.getElementById("boxConsole");
+	//由于将实时获取滑动位置，和tap写在一起所以要进行判断
+	if (type.status == 'tap') {
 		log.innerHTML = '我被tap了'+ k +'次';
 		k++;
-		//如果tap和实时监控并存，tap的处理
 	} else {
 		log.innerHTML = '我正在被滑动(时间戳' + (+new Date()) +')';
-		//如果tap和实时监控并存，实时获取处理
 	}
 });
 </code>
@@ -81,8 +81,9 @@ etouch("#box",function(e,touchobj) {
 <pre class="language-javascript">
 <code>
 etouch('.list li',function(e) {
-	alert(this.innerHTML);
-})
+	if (type.status == 'tap') 
+		alert(this.innerHTML);
+});
 </code>
 </pre>	
 		<h3>也支持事件委托实现</h3>
@@ -90,8 +91,9 @@ etouch('.list li',function(e) {
 		
 <pre class="language-javascript">
 <code>
-etouch("#body",".list li span",function(e,touchobj) {
-	alert('我是被tap的span');
+etouch("#body",".list li span",function(e,type) {
+	if (type.status == 'tap')
+		alert(this.innerHTML);
 });
 </code>
 </pre>		
@@ -102,7 +104,7 @@ etouch("#body",".list li span",function(e,touchobj) {
 		<div id="pox">进来滑动试试</div>
 <pre class="language-javascript">
 	<code>
-etouch("#pox",function(e,touchobj) {
+etouch("#pox",function(e,type) {
 	e.preventDefault(); //阻止浏览器默认事件
 }).on('up',function(e) {
 	alert('上滑动');
@@ -119,28 +121,30 @@ etouch("#pox",function(e,touchobj) {
 
   	<script type="text/javascript">
   		var k = 1;
-  		etouch("#box",function(e,touchobj) {
-  			e.preventDefault(); //阻止浏览器默认事件 
-  			var log = document.getElementById("boxConsole")
-  			if (touchobj.status == 'tap') {
-  				log.innerHTML = '我被tap了'+ k +'次';
-  				k++;
-  				//如果tap和实时监控并存，tap的处理
-  			} else {
-  				log.innerHTML = '我正在被滑动(时间戳' + (+new Date()) +')';
-  				//如果tap和实时监控并存，实时获取处理
-  			}
+  		etouch("#box",function(e,type) {
+  			//阻止浏览器默认事件  会把浏览器滑动事件也阻止
+			e.preventDefault(); 
+			var log = document.getElementById("boxConsole");
+			//由于将实时获取滑动位置，和tap写在一起所以要进行判断
+			if (type.status == 'tap') {
+				log.innerHTML = '我被tap了'+ k +'次';
+				k++;
+			} else {
+				log.innerHTML = '我正在被滑动(时间戳' + (+new Date()) +')';
+			}
+		});
+  		
+  		etouch('.list li',function(e,type) {
+  			if (type.status == 'tap') 
+  				alert(this.innerHTML);
   		});
   		
-  		etouch('.list li',function(e) {
-  			alert(this.innerHTML);
-  		})
-  		
-  		etouch("#body",".list li span",function(e,touchobj) {
-			alert('我是被tap的span');
+  		etouch("#body",".list li span",function(e,type) {
+			if (type.status == 'tap')
+  				alert(this.innerHTML);
 		});
 		
-		etouch("#pox",function(e,touchobj) {
+		etouch("#pox",function(e,type) {
 			e.preventDefault(); //阻止浏览器默认事件
 		}).on('up',function(e) {
 			alert('上滑动');
