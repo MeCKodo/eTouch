@@ -10,6 +10,7 @@
 //事件代理例子 !!!!!第一个参数仅支持id!!!!!!
 etouch('#box','li',function(e,touchObj) {
   // 以下数据是实时监听的，tap的回调可写在这。
+  	e.preventDefault();
  	console.log(this.innerHTML); //this为dom对象
   	console.log(touchObj);//滑动返回对象
  	console.log(touchObj.status);//滑动状态，tap，left top等等
@@ -32,6 +33,7 @@ etouch('#box','li',function(e,touchObj) {
    
 //直接事件绑定
  etouch('li',function(e,touchObj) {
+ 	e.preventDefault();
  	console.log(this,e,touchObj);
  }).on('left',function() {
  
@@ -45,6 +47,7 @@ etouch('#box','li',function(e,touchObj) {
 require(['etouch'],function(etouch) {
 	
 	new etouch('#box',function(e) {
+		e.preventDefault();
 		console.log('box');
 	});
 	
