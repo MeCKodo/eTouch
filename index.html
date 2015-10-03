@@ -133,11 +133,11 @@ etouch("#pox",function(e,touchobj) {
   		});
   		
   		etouch('.list li',function(e) {
-  			console.log(this.innerHTML);
+  			alert(this.innerHTML);
   		})
   		
   		etouch("#body",".list li span",function(e,touchobj) {
-			console.log('我是被tap的span');
+			alert('我是被tap的span');
 		});
 		
 		etouch("#pox",function(e,touchobj) {
