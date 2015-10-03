@@ -6,13 +6,15 @@
 
 	function delegate(agent, type, selector, fn) {
 			//为了复杂的选择器实现
-			if (typeof selector != "string") {
+
+			if (typeof selector == "function") {
 				for (var i = 0; i < agent.length; i++) {
-					agent[i].addEventListener(type, fn, false);
+					agent[i].addEventListener(type,fn, false);
 				}
 				return;
-			}
+			} 
 			agent[0].addEventListener(type, function(e) {
+				
 				var target = e.target;
 				var ctarget = e.currentTarget;
 				var bubble = true;
@@ -24,6 +26,8 @@
 				}
 				return bubble;
 			}, false);
+			
+			
 
 			function filiter(agent, selector, target) {
 				var nodes = agent[0].querySelectorAll(selector);
@@ -90,7 +94,6 @@
 				this.Event[i].method.call(this.target, e);
 			}
 		}
-		e.preventDefault();
 		return this;
 	}
 	Etouch.prototype.on = function(type, fn) {
@@ -139,7 +142,7 @@
 				//返二个参数 指向被触发的dom，和当前构造函数
 				setTimeout(function() {
 					isTap = false;
-					fn.call(module, e, touchObj);
+					fn.call(target, e, touchObj);
 				}, 30);
 			}
 		} else { //否则为滑动或者双击，双击暂不想做
