@@ -81,7 +81,6 @@ etouch("#box",function(e,touchobj) {
 <pre class="language-javascript">
 <code>
 etouch('.list li',function(e) {
-	e.preventDefault();
 	alert(this.innerHTML);
 })
 </code>
@@ -92,7 +91,6 @@ etouch('.list li',function(e) {
 <pre class="language-javascript">
 <code>
 etouch("#body",".list li span",function(e,touchobj) {
-	e.preventDefault(); //阻止浏览器默认事件 
 	alert('我是被tap的span');
 });
 </code>
@@ -135,13 +133,11 @@ etouch("#pox",function(e,touchobj) {
   		});
   		
   		etouch('.list li',function(e) {
-  			e.preventDefault();
-  			alert(this.innerHTML);
+  			console.log(this.innerHTML);
   		})
   		
   		etouch("#body",".list li span",function(e,touchobj) {
-			e.preventDefault(); //阻止浏览器默认事件 
-			alert('我是被tap的span');
+			console.log('我是被tap的span');
 		});
 		
 		etouch("#pox",function(e,touchobj) {
