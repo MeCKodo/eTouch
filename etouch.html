@@ -92,6 +92,7 @@
 			//第一个参数为代理元素 必须为id 第二个参数为触发对象 第三个参数是回调	
 			etouch('#box','li',function(e,type) {
 				//这里可以实时监听滑动距离，tap的回调也写这里即可。
+				e.preventDefault();
 				console.log('------------li---------');
 				if (type.status == 'tap') {
 					console.log('tap触发');
@@ -108,7 +109,6 @@
 			}).on('left',function(e) {
 				console.log('li-------的左滑回调');
 			})
-			
 			
 		</script>
 	</body>
