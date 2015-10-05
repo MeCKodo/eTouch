@@ -70,23 +70,46 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-			
-			//第一个参数为代理元素 必须为id 第二个参数为触发对象 第三个参数是回调	
-			etouch('#box','li',function(e,touchObj) {
-				//这里可以实时监听滑动距离，tap的回调也写这里即可。
-				console.log('------------li---------');
-			}).on('left',function(e) {
-				console.log('li-------的左滑回调');
-			})
-			
-			etouch('#pox',function(e,touchObj) {
+			etouch('#pox',function(e,type) {
 				e.preventDefault();
-				console.log(e);
+				if (type.status == 'tap') {
+					console.log('tap触发');
+				} else {
+					console.log(type);//滑动返回对象
+				 	console.log(type.status);//滑动状态，tap，left top等等
+				 	console.log(type.pageX); //当前屏幕X
+				 	console.log(type.pageY); //当前屏幕Y
+				 	console.log(type.clientX); //页面距离X
+				 	console.log(type.clientY); //页面距离Y
+				 	console.log(type.distanceX); //X轴位移
+				 	console.log(type.distanceY); //Y轴位移
+				}
 			}).on('left',function(e) {
 				e.preventDefault();
 				console.log(e);
 				console.log('Left');
 			});
+			//第一个参数为代理元素 必须为id 第二个参数为触发对象 第三个参数是回调	
+			etouch('#box','li',function(e,type) {
+				//这里可以实时监听滑动距离，tap的回调也写这里即可。
+				console.log('------------li---------');
+				if (type.status == 'tap') {
+					console.log('tap触发');
+				} else {
+					console.log(type);//滑动返回对象
+				 	console.log(type.status);//滑动状态，tap，left top等等
+				 	console.log(type.pageX); //当前屏幕X
+				 	console.log(type.pageY); //当前屏幕Y
+				 	console.log(type.clientX); //页面距离X
+				 	console.log(type.clientY); //页面距离Y
+				 	console.log(type.distanceX); //X轴位移
+				 	console.log(type.distanceY); //Y轴位移
+				}
+			}).on('left',function(e) {
+				console.log('li-------的左滑回调');
+			})
+			
+			
 		</script>
 	</body>
 </html>
