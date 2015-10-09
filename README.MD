@@ -1,4 +1,4 @@
-## 仅仅只有150行代码的手势库
+## 仅仅只有150行不到的手势库(压缩后2.2K，gzip没测)
 
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
 (从forchangejs里提取的手势模块)
@@ -8,40 +8,30 @@
 
 ```javascript
 //事件代理例子 !!!!!第一个参数仅支持id!!!!!!
-etouch('#box','li',function(e,type) {
-  // 以下数据是实时监听的，tap的回调可写在这。
-    console.log('------------li---------');
-	if (type.status == 'tap') {
-		console.log('tap触发');
-	} else {
-		console.log(type);//滑动返回对象
-	 	console.log(type.status);//滑动状态，tap，left top等等
-	 	console.log(type.pageX); //当前屏幕X
-	 	console.log(type.pageY); //当前屏幕Y
-	 	console.log(type.clientX); //页面距离X
-	 	console.log(type.clientY); //页面距离Y
-	 	console.log(type.distanceX); //X轴位移
-	 	console.log(type.distanceY); //Y轴位移
-	}
-  	return false; 即可阻止事件冒泡
-}).on('left',function() { //左滑的回调
- 
-}).on('right',function() { //右滑的回调
- 
-}).on('up',function() { //上滑的回调
- 
-}).on('down',function() { //下滑的回调
- 
-});
-   
-//直接事件绑定
- etouch('li',function(e,touchObj) {
+支持复杂选择器代理
+etouch('#pox','.ul li span',function(e,touch) {
+				console.log('我仅仅至少一个tap啊！');
+				console.log(touch);
+			}).on('swiper',function(e,touch) {
+				e.preventDefault();
+				console.log('实时获取');
+			}).on('up',function(e,touch) {
+				console.log('上滑回调');
+			}).on('down',function(e,touch) {
+				console.log('下滑回调');
+			}).on('left',function(e,touch) {
+				console.log('左滑回调');
+			}).on('right',function(e,touch) {
+				console.log('右滑回调');
+			});
+//直接事件批量绑定
+ etouch('li',function(e,touch) {
  	e.preventDefault();
- 	console.log(this,e,touchObj);
+ 	console.log(this,e,touch);
  }).on('left',function() {
  
 })
- //  e为事件对象，touchObj为触摸返回对象
+ //  e为事件对象，touch为触摸返回对象
 ```
 
 还支持 CMD 和 AMD 
