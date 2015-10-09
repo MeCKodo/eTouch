@@ -142,24 +142,28 @@ etouch("#pox",function(e,touch) {
 			alert(this.innerHTML);
 		});
 		etouch("#pox",function(e,touch) {
-			console.log(e);
+			console.log(touch);
 			e.preventDefault(); //阻止浏览器默认事件
 		}).on('swiper',function(e,touch) {
 			//既然要监听滑动的回调，首先要在这阻止浏览器默认行为
 			//因为上下左右滑动的过程其实就是swiper
 			e.preventDefault();
-			console.log('swiper');
+			console.log(touch);
 		}).on('up',function(e,touch) {
 			$("#coming").append('上滑动<br/>');
 			console.log(e);
+			console.log(touch);
 		}).on('left',function(e,touch) {
 			$("#coming").append('左滑动<br/>');
 			console.log(e);
+			console.log(touch);
 		}).on('right',function(e,touch) {
 			$("#coming").append('右滑动<br/>');
 			console.log(e);
+			console.log(touch);
 		}).on('down',function(e,touch) {
 			$("#coming").append('下滑动<br/>');
+			console.log(touch);
 		});
   	</script>
   </body>
