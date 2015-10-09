@@ -104,7 +104,7 @@
 			_this = this;
 		delegate(this.root, 'touchstart', this.selector, function(e) {
 			_this.target = this; //存储点击对象是谁
-			touchStart(e, touchObj, _this)
+			touchStart(e, touchObj, _this);
 		});
 		delegate(this.root, 'touchmove', this.selector, function(e) {
 			touchMove(e, this, touchObj, _this);
@@ -119,7 +119,7 @@
 		var touchType = this.touchObj.status;
 		for (var i = 0; i < this.Event.length; i++) {
 			if (this.Event[i].type == type) {
-				this.Event[i].method.call(this.target, e, this.touchObj);
+				this.Event[i].method.call(this.target,e, this.touchObj);
 			}
 		}
 		return this;
@@ -157,7 +157,6 @@
 	function touchEnd(e, target, touchObj, module, fn) {
 		var touches = e.changedTouches[0];
 		var time = +new Date() - module.time;
-
 		touchObj.distanceX = touches.pageX - touchObj.pageX;
 		touchObj.distanceY = touches.pageY - touchObj.pageY;
 		//计算手指滑动方向
@@ -175,7 +174,7 @@
 				//返二个参数 指向被触发的dom，和当前构造函数
 				setTimeout(function() {
 					isTap = false;
-					fn.call(module, e, touchObj);
+					fn.call(target, e, touchObj);
 				}, 30);
 			}
 		} else { //否则为滑动或者双击，双击暂不想做

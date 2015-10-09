@@ -74,7 +74,8 @@
 				console.log('我仅仅至少一个tap啊！');
 				console.log(touch);
 			}).on('swiper',function(e,touch) {
-				e.preventDefault();
+				e.preventDefault(); 
+				//如果有以下的回调必须在这阻止浏览器默认行为
 				console.log('实时获取');
 			}).on('up',function(e,touch) {
 				console.log('上滑回调');
@@ -88,6 +89,7 @@
 			//第一个参数为代理元素 必须为id 第二个参数为触发对象 第三个参数是回调	
 			etouch('#box','li',function(e,touch) {
 				console.log('tap触发');
+				console.log(touch);
 			}).on('left',function(e) {
 				console.log('li-------的左滑回调');
 			})
