@@ -1,7 +1,8 @@
 ## 仅仅只有150行不到的手势库(压缩后2.2K，gzip没测)
 
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
-(从forchangejs里提取的手势模块)
+
+从[forchange.js](https://github.com/MeCKodo/forchange)（我的移动端轮子） 里提取的手势模块
 
  [事例链接地址!](http://meckodo.github.io/eTouch/index.html) 
 #### 举个粒子
