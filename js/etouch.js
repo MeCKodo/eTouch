@@ -1,35 +1,3 @@
-/**
- *  @description 手势构造函数，暂支持tap和上下左右滑动，支持事件代理
- *  @param {String} id
- *  @param {String} selector(可选)  支持复杂选择器
- *  @param {function} fn
- *
- *  @example  事件代理例子 !!!!!第一个参数仅支持id!!!!!!
- *	支持复杂选择器代理
- *	etouch('#pox','.ul li span',function(e,touch) {
- *		console.log('我仅仅至少一个tap啊！');
- *		console.log(touch);
- *	}).on('swiper',function(e,touch) {
- *		e.preventDefault();
- *		console.log('实时获取');
- *	}).on('up',function(e,touch) {
- *		console.log('上滑回调');
- *	}).on('down',function(e,touch) {
- *		console.log('下滑回调');
- *	}).on('left',function(e,touch) {
- *		console.log('左滑回调');
- *	}).on('right',function(e,touch) {
- *		console.log('右滑回调');
- *	});
- *
- * @example  直接事件绑定
- *  etouch('li',function(e,touch) {
- *		console.log(this,e,touch);
- *	}).on('left',function() {
- *
- *  })
- *  e为事件对象，touch为触摸返回对象
- */
 (function(window, undefined) {
 	function swipeDirection(x1, x2, y1, y2) {
 			return Math.abs(x1 - x2) >= Math.abs(y1 - y2) ? (x1 - x2 > 0 ? 'left' : 'right') : (y1 - y2 > 0 ? 'up' : 'down');
@@ -104,7 +72,7 @@
 			_this = this;
 		delegate(this.root, 'touchstart', this.selector, function(e) {
 			_this.target = this; //存储点击对象是谁
-			touchStart(e, touchObj, _this)
+			touchStart(e, touchObj, _this);
 		});
 		delegate(this.root, 'touchmove', this.selector, function(e) {
 			touchMove(e, this, touchObj, _this);
@@ -119,7 +87,7 @@
 		var touchType = this.touchObj.status;
 		for (var i = 0; i < this.Event.length; i++) {
 			if (this.Event[i].type == type) {
-				this.Event[i].method.call(this.target, e, this.touchObj);
+				this.Event[i].method.call(this.target,e, this.touchObj);
 			}
 		}
 		return this;
@@ -157,7 +125,6 @@
 	function touchEnd(e, target, touchObj, module, fn) {
 		var touches = e.changedTouches[0];
 		var time = +new Date() - module.time;
-
 		touchObj.distanceX = touches.pageX - touchObj.pageX;
 		touchObj.distanceY = touches.pageY - touchObj.pageY;
 		//计算手指滑动方向
@@ -175,7 +142,7 @@
 				//返二个参数 指向被触发的dom，和当前构造函数
 				setTimeout(function() {
 					isTap = false;
-					fn.call(module, e, touchObj);
+					fn.call(target, e, touchObj);
 				}, 30);
 			}
 		} else { //否则为滑动或者双击，双击暂不想做
