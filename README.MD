@@ -3,8 +3,6 @@
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
 (从forchangejs里提取的手势模块)
 
-<<<<<<< HEAD
- [事例链接地址!](http://meckodo.github.io/eTouch/index.html) 
 #### 举个粒子
 
 ```javascript
@@ -48,6 +46,3 @@ require(['etouch'],function(etouch) {
 })
 
 ```
-=======
-事例Demo
->>>>>>> 52d0eea197989f0a3e14802c86993cca3e035cc6
