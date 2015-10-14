@@ -168,12 +168,12 @@
 
 		//当手指触摸时间＜150和位移小于2px则为tap事件
 		if (time < 150 && Math.abs(touchObj.distanceX) < 2 && Math.abs(touchObj.distanceY) < 2) {
-			isTap = true;
-			if (isTap) {
+			module.isTap = true;
+			if (module.isTap) {
 				touchObj.status = 'tap';
 				//返二个参数 指向被触发的dom，和当前构造函数
 				setTimeout(function() {
-					isTap = false;
+					module.isTap = false;
 					fn.call(target, e, touchObj);
 				}, 30);
 			}
