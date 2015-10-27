@@ -4,7 +4,9 @@
 
 从[forchange.js](https://github.com/MeCKodo/forchange)（我的移动端轮子） 里提取的手势模块
 
- [事例链接地址!](http://meckodo.github.io/eTouch/index.html) 
+ [事例链接地址!戳我戳我戳我](http://meckodo.github.io/eTouch/index.html)
+ 15-10-27
+ 新增没有支持CMD和AMD版本,在使用avalon自带加载器过程中,有支持的版本无法使用
 #### 举个粒子
 
 ```javascript
