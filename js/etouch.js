@@ -88,6 +88,8 @@
 		this.time = 0; //记录点击的时间间隔
 		this.selector = selector;
 		this.Event = []; //存放上下左右滑的回调事件
+		this.count = 0;
+		this.p = 0;
 		if (arguments[2] == undefined) {
 			this.operate(arguments[1]);
 		} else {
@@ -150,14 +152,24 @@
 		//计算手指移动位置
 		touchObj.distanceX = touches.pageX - touchObj.pageX;
 		touchObj.distanceY = touches.pageY - touchObj.pageY;
+		module.count++;
+		module.p = module.p + 0.5 * touchObj.distanceY * touchObj.distanceY / touchObj.distanceX;
+		var pd = module.p / module.count;
+		var qs = pd / Math.sqrt(Math.abs(touchObj.distanceX));
 
-		console.log(touchObj.distanceY * touchObj.distanceX + '----------');
-		console.log(touchObj.distanceX * touchObj.distanceX + '++++++++++');
+		var ss = 0.5 * target.getBoundingClientRect().height * touchObj.distanceX * touchObj.distanceX /  target.getBoundingClientRect().width;
 
-		if (touchObj.status == 'swiper' && Math.abs(1/2 * touchObj.distanceY * touchObj.distanceX) < Math.abs(1/2 * touchObj.distanceX * touchObj.distanceX)) {
+		console.log(ss,'ssssssssssssssssssss');
+		console.log(qs,'qqqqqqqqqqqqqqqqqq');
+		if(qs > ss) {
+			console.log('----------------');
+		} else {
+			console.log('++++++++++++++');
+		}
+		/*if (touchObj.status == 'swiper' && Math.abs(1/2 * touchObj.distanceY * touchObj.distanceX) < Math.abs(1/2 * touchObj.distanceX * touchObj.distanceX)) {
 			e.preventDefault();
 			module.trigger(touchObj.status, e, touchObj);
-		}
+		}*/
 	}
 
 	function touchEnd(e, target, touchObj, module, fn) {
@@ -186,6 +198,8 @@
 		} else { //否则为滑动或者双击，双击暂不想做
 			module.trigger(touchObj.status, e, touchObj);
 		}
+		module.count = 0;
+		module.p = 0;
 	}
 
 	if (typeof define === 'function' && (define.amd || define.cmd)) {
