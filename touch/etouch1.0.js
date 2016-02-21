@@ -51,7 +51,7 @@
 				while (bubble && target != ctarget) {
 					if (filiter(agent, selector, target)) {
 						bubble = fn.call(target, e); //要吧事件e返回出去调用
-					}
+					};
 					target = target.parentNode;
 				}
 				return bubble;
@@ -98,7 +98,6 @@
 		this.touchObj.distanceX = 0;
 		this.touchObj.distanceY = 0;
 	};
-
 	etouch.prototype.operate = function(fn) {
 		var touchObj = this.touchObj, //缓存touchObj
 			isTap = this.isTap,
@@ -147,6 +146,7 @@
 
 	function touchMove(e, target, touchObj, module) {
 		var touches = e.touches[0];
+
 		touchObj.status = 'swiper';
 		//计算手指移动位置
 		touchObj.distanceX = touches.pageX - touchObj.pageX;
@@ -168,7 +168,7 @@
 		touchObj.status = swipeDirection(x1, x2, y1, y2);
 
 		//当手指触摸时间＜150和位移小于2px则为tap事件
-		if (time < 150 && Math.abs(touchObj.distanceX) < 2 && Math.abs(touchObj.distanceY) < 2) {
+		if (time < 150 && Math.abs(touchObj.distanceX) < 2 ) {
 			module.isTap = true;
 			if (module.isTap) {
 				touchObj.status = 'tap';
