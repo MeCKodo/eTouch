@@ -13,6 +13,10 @@
     <script src="js/etouch.js" touch="text/javascript" charset="utf-8"></script>
     <script src="js/prism.js" touch="text/javascript" charset="utf-8"></script>
     <style touch="text/css">
+        * {
+            padding:0;
+            margin:0;
+        }
         #box {
             width: 100px;
             height: 100px;
@@ -23,15 +27,126 @@
             height: 200px;
             background: #A6E22E;
         }
-        .list li {
+        #list {
+            overflow: hidden;
+        }
+        #list li {
+            position: relative;
+            list-style: none;
             height: 50px;
-            line-height: 50px;
-            line-height: 50px;
+            margin:5px 0;
+            border-bottom:1px solid #ccc;
+        }
+        #list p {
+            position: relative;
+            height: 49px;
+            background: #fff;
+            line-height: 49px;
+            z-index: 2;
+            -webkit-transform: translate3d(0,0,0);
+            transform: translate3d(0,0,0);
+        }
+        #list p.on {
+            -webkit-transform: translate3d(-140px,0,0) !important;
+            transform: translate3d(-140px,0,0) !important;
+            -webkit-transition: all .35s ease !important;
+            transition: all .35s ease !important;
+        }
+        #list div {
+            position: absolute;
+            height: 49px;
+            line-height: 49px;
+            width: 140px;
+            right: 0;
+            top: 0;
+            text-align: left;
+            background: #abcdef;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
 <h3>滑动删除例子</h3>
+<ul id="list">
+    <li>
+        <div>我是下层</div>
+        <p>item 1item 1item 1item 1item 1item 1item 1item 1item 1item 1item 1</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 2</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 3</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 4</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 5</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 6</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 7</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 7</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 8</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 9</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 10</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 11</p>
+    </li>
 
+</ul>
+<script>
+    etouch("#list", "p", function () {
+
+    }).on('swiper',function(e,touch) {
+        var _this = this;
+        if (touch.distanceX < 0) {
+            $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
+        } else {
+            $(_this).removeClass('on');
+            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
+            setTimeout(function() {
+                $(_this).css({'-webkit-transition':'none'});
+            },500)
+        }
+    }).on('left',function(e,touch) {
+        var _this = this;
+        if(Math.abs(touch.distanceX) > 30) {
+            $(_this).addClass('on');
+        } else {
+            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
+            setTimeout(function() {
+                $(_this).css({'-webkit-transition':'none'});
+            },500)
+        }
+    }).on('right',function(e,touch) {
+        if(Math.abs(touch.distanceX) > 0) {
+            $(this).removeClass('on');
+        }
+    });
+</script>
 </body>
 </html>
