@@ -153,7 +153,7 @@
 
 		//console.log(touchObj.distanceY / touchObj.distanceX);
 
-		if (touchObj.status == 'swiper' && Math.abs(touchObj.distanceY / touchObj.distanceX) < 0.6) {
+		if (touchObj.status == 'swiper' && Math.abs(touchObj.distanceY * touchObj.distanceX) < Math.abs(2 * touchObj.distanceX)) {
 			e.preventDefault();
 			module.trigger(touchObj.status, e, touchObj);
 		}

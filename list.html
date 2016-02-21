@@ -116,36 +116,59 @@
         <div>我是下层</div>
         <p>item 11</p>
     </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 7</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 7</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 8</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 9</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 10</p>
+    </li>
+    <li>
+        <div>我是下层</div>
+        <p>item 11</p>
+    </li>
 
 </ul>
 <script>
     etouch("#list", "p", function () {
-
     }).on('swiper',function(e,touch) {
         var _this = this;
-        if (touch.distanceX < 0) {
+//        if (touch.distanceX < 0) {
             $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
-        } else {
-            $(_this).removeClass('on');
-            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
-            setTimeout(function() {
-                $(_this).css({'-webkit-transition':'none'});
-            },500)
-        }
+//        } else {
+//            $(_this).removeClass('on');
+//            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
+//            setTimeout(function() {
+//                $(_this).css({'-webkit-transition':'none'});
+//            },500)
+//        }
     }).on('left',function(e,touch) {
         var _this = this;
-        if(Math.abs(touch.distanceX) > 30) {
+        /*if(Math.abs(touch.distanceX) > 30) {
             $(_this).addClass('on');
         } else {
             $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
             setTimeout(function() {
                 $(_this).css({'-webkit-transition':'none'});
             },500)
-        }
+        }*/
     }).on('right',function(e,touch) {
-        if(Math.abs(touch.distanceX) > 0) {
-            $(this).removeClass('on');
-        }
+//        if(Math.abs(touch.distanceX) > 0) {
+//            $(this).removeClass('on');
+//        }
     });
 </script>
 </body>
