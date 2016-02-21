@@ -151,9 +151,10 @@
 		touchObj.distanceX = touches.pageX - touchObj.pageX;
 		touchObj.distanceY = touches.pageY - touchObj.pageY;
 
-		//console.log(touchObj.distanceY / touchObj.distanceX);
+		console.log(touchObj.distanceY * touchObj.distanceX + '----------');
+		console.log(touchObj.distanceX * touchObj.distanceX + '++++++++++');
 
-		if (touchObj.status == 'swiper' && Math.abs(touchObj.distanceY * touchObj.distanceX) < Math.abs(2 * touchObj.distanceX)) {
+		if (touchObj.status == 'swiper' && Math.abs(1/2 * touchObj.distanceY * touchObj.distanceX) < Math.abs(1/2 * touchObj.distanceX * touchObj.distanceX)) {
 			e.preventDefault();
 			module.trigger(touchObj.status, e, touchObj);
 		}
