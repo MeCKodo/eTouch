@@ -14,7 +14,7 @@
 //事件代理例子 !!!!!第一个参数仅支持id!!!!!!
 支持复杂选择器代理
 etouch('#pox','.ul li span',function(e,touch) {
-	console.log('我仅仅至少一个tap啊！');
+	console.log('我仅仅只是一个tap啊！');
 	console.log(touch);
 }).on('swiper',function(e,touch) {
 	e.preventDefault(); 

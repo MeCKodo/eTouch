@@ -74,8 +74,8 @@
 				console.log('我仅仅至少一个tap啊！');
 				console.log(touch);
 			}).on('swiper',function(e,touch) {
-				e.preventDefault(); 
 				//如果有以下的回调必须在这阻止浏览器默认行为
+				e.preventDefault();
 				console.log('实时获取');
 			}).on('up',function(e,touch) {
 				console.log('上滑回调');
