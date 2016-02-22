@@ -158,12 +158,13 @@
 		var qs = (2/3) * (2 * pd * touchObj.distanceX) * Math.sqrt(2 * pd * touchObj.distanceX);
 		var targetH = target.getBoundingClientRect().height;
 		var targetW = target.getBoundingClientRect().width;
-		var ss = (2/3) * ( targetH * targetH * touchObj.distanceX / targetW) * Math.sqrt( targetH * targetH * touchObj.distanceX / targetW);
+		var ss = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
 
-		//console.log(ss,'ssssssssssssssssssss');
-		//console.log(qs,'qqqqqqqqqqqqqqqqqq');
+		console.log(ss,'ssssssssssssssssssss');
+		console.log(qs,'qqqqqqqqqqqqqqqqqq');
 		if (touchObj.status == 'swiper' && qs < ss) {
 			e.preventDefault();
+			console.log(1);
 			module.trigger(touchObj.status, e, touchObj);
 		}
 

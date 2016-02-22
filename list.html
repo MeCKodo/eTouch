@@ -37,6 +37,17 @@
             margin:5px 0;
             border-bottom:1px solid #ccc;
         }
+        #list div {
+            position: absolute;
+            height: 49px;
+            line-height: 49px;
+            width: 140px;
+            right: 0;
+            top: 0;
+            text-align: left;
+            background: #abcdef;
+            z-index: 1;
+        }
         #list p {
             position: relative;
             height: 49px;
@@ -52,17 +63,7 @@
             -webkit-transition: all .35s ease !important;
             transition: all .35s ease !important;
         }
-        #list div {
-            position: absolute;
-            height: 49px;
-            line-height: 49px;
-            width: 140px;
-            right: 0;
-            top: 0;
-            text-align: left;
-            background: #abcdef;
-            z-index: 1;
-        }
+
     </style>
 </head>
 <body>
@@ -158,7 +159,6 @@
         },210);
     });
     $("body").on("touchend", function () {
-        console.log(idx);
         if(flag == 1) {
             $("#list p").eq(idx).addClass('on');
         } else if(flag == 2) {
@@ -172,6 +172,7 @@
     etouch("#list", "p", function () {
     }).on('swiper',function(e,touch) {
         var _this = this;
+        console.log('-----');
         if (touch.distanceX < 0) {
             if(touch.distanceX < -30) {
                 flag = 1;
