@@ -2,12 +2,15 @@
 
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
 
-从[forchange.js](https://github.com/MeCKodo/forchange)（我的移动端轮子） 里提取的手势模块
+> * 2016/2/22  重大更新, 为了精确预判用户行为,通过手指划过的曲线面积,使用微积分算法,极大提高精确度
 
- [事例链接地址!戳我戳我戳我](http://meckodo.github.io/eTouch/index.html)
- 15-10-27
+ [仿聊天列表,item可左右滑动示例](http://meckodo.github.io/eTouch/index.html) 16/2/22
 
+ [普通示例地址!戳我戳我戳我](http://meckodo.github.io/eTouch/index.html) 15-10-27
+ 
  新增没有支持CMD和AMD版本,在使用avalon自带加载器过程中,有支持的版本无法使用
+ 
+
 #### 举个粒子
 
 ```javascript
@@ -17,7 +20,6 @@ etouch('#pox','.ul li span',function(e,touch) {
 	console.log('我仅仅只是一个tap啊！');
 	console.log(touch);
 }).on('swiper',function(e,touch) {
-	e.preventDefault(); 
 	console.log('实时获取');
 }).on('up',function(e,touch) {
 	console.log('上滑回调');
@@ -30,7 +32,6 @@ etouch('#pox','.ul li span',function(e,touch) {
 });
 //直接事件批量绑定
  etouch('li',function(e,touch) {
- 	e.preventDefault();
  	console.log(this,e,touch);
  }).on('left',function() {
  

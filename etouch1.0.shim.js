@@ -10,7 +10,6 @@
  *		console.log('我仅仅至少一个tap啊！');
  *		console.log(touch);
  *	}).on('swiper',function(e,touch) {
- *		e.preventDefault();
  *		console.log('实时获取');
  *	}).on('up',function(e,touch) {
  *		console.log('上滑回调');
@@ -70,11 +69,16 @@
 
     function eTouch(root, selector, fn) {
         this.root = document.querySelectorAll(root); //root委托元素
-        this.target = null; //当前点击的对象
         if (!this.root) {
             console.log('root不存在');
             return;
         }
+
+        this.target = {//当前点击的对象
+            el : null,
+            w : null,
+            height : null
+        };
         this.touchObj = {
             status: '',
             pageX: 0,
@@ -82,12 +86,14 @@
             clientX: 0,
             clientY: 0,
             distanceX: 0,
-            distanceY: 0,
-        }
+            distanceY: 0
+        };
         this.isTap = false; //用来判断是否为tap
         this.time = 0; //记录点击的时间间隔
         this.selector = selector;
         this.Event = []; //存放上下左右滑的回调事件
+        this.count = 0;
+        this.p = 0;
         if (arguments[2] == undefined) {
             this.operate(arguments[1]);
         } else {
@@ -103,20 +109,20 @@
             isTap = this.isTap,
             _this = this;
         delegate(this.root, 'touchstart', this.selector, function(e) {
-            _this.target = this; //存储点击对象是谁
+            _this.target.el = this; //存储点击对象是谁
+            _this.target.w = target.getBoundingClientRect().width;
+            _this.target.h = target.getBoundingClientRect().height;
             touchStart(e, touchObj, _this);
         });
         delegate(this.root, 'touchmove', this.selector, function(e) {
-            touchMove(e, this, touchObj, _this);
+            touchMove(e, _this.target, touchObj, _this);
         });
         delegate(this.root, 'touchend', this.selector, function(e) {
             touchEnd(e, this, touchObj, _this, fn);
-
         });
         return this;
     }
     eTouch.prototype.trigger = function(type, e) {
-        var touchType = this.touchObj.status;
         for (var i = 0; i < this.Event.length; i++) {
             if (this.Event[i].type == type) {
                 this.Event[i].method.call(this.target,e, this.touchObj);
@@ -150,13 +156,30 @@
         //计算手指移动位置
         touchObj.distanceX = touches.pageX - touchObj.pageX;
         touchObj.distanceY = touches.pageY - touchObj.pageY;
+        /*
+         * 以下是
+         * 手指划过微积分算法
+         * */
+        module.count++;
+        module.p = module.p + 0.5 * touchObj.distanceY * touchObj.distanceY / touchObj.distanceX;
+        var pAvg = module.p / module.count;
+        var touchS = (2/3) * (2 * pAvg * touchObj.distanceX) * Math.sqrt(2 * pAvg * touchObj.distanceX);
 
-        //console.log(touchObj.distanceY / touchObj.distanceX);
+        var targetH = target.h;
+        var targetW = target.w;
 
-        if (touchObj.status == 'swiper' && Math.abs(touchObj.distanceY / touchObj.distanceX) < 1.2) {
+        var targetS = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
+        /*
+         * 以上是
+         * 手指划过微积分算法
+         * */
+        //console.log(touchS,'手指曲线');
+        //console.log(targetS,'目标曲线');
+        if (touchObj.status == 'swiper' && touchS < targetS) {
             e.preventDefault();
             module.trigger(touchObj.status, e, touchObj);
         }
+
     }
 
     function touchEnd(e, target, touchObj, module, fn) {
@@ -185,6 +208,8 @@
         } else { //否则为滑动或者双击，双击暂不想做
             module.trigger(touchObj.status, e, touchObj);
         }
+        module.count = 0;
+        module.p = 0;
     }
 
     window.etouch = function(root, selector, fn) {
