@@ -155,7 +155,7 @@
 		module.count++;
 		module.p = module.p + 0.5 * touchObj.distanceY * touchObj.distanceY / touchObj.distanceX;
 		var pd = module.p / module.count;
-		var qs = pd / Math.sqrt(Math.abs(touchObj.distanceX));
+		var qs = (2/3) * (2 * pd * touchObj.distanceX) * Math.sqrt(2 * pd * touchObj.distanceX);
 
 		var ss = 0.5 * target.getBoundingClientRect().height * touchObj.distanceX * touchObj.distanceX /  target.getBoundingClientRect().width;
 
@@ -164,12 +164,12 @@
 		if(qs > ss) {
 			console.log('----------------');
 		} else {
-			console.log('++++++++++++++');
+			if (touchObj.status == 'swiper' && Math.abs(1/2 * touchObj.distanceY * touchObj.distanceX) < Math.abs(1/2 * touchObj.distanceX * touchObj.distanceX)) {
+				e.preventDefault();
+				module.trigger(touchObj.status, e, touchObj);
+			}
 		}
-		/*if (touchObj.status == 'swiper' && Math.abs(1/2 * touchObj.distanceY * touchObj.distanceX) < Math.abs(1/2 * touchObj.distanceX * touchObj.distanceX)) {
-			e.preventDefault();
-			module.trigger(touchObj.status, e, touchObj);
-		}*/
+
 	}
 
 	function touchEnd(e, target, touchObj, module, fn) {
