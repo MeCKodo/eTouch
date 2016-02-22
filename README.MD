@@ -4,7 +4,7 @@
 
 > * 2016/2/22  重大更新, 为了精确预判用户行为,通过手指划过的曲线面积,使用微积分算法,极大提高精确度
 
- [仿聊天列表,item可左右滑动示例](http://meckodo.github.io/eTouch/index.html) 16/2/22
+ [仿聊天列表,item可左右滑动示例](http://meckodo.github.io/eTouch/list.html) 16/2/22
 
  [普通示例地址!戳我戳我戳我](http://meckodo.github.io/eTouch/index.html) 15-10-27
  
