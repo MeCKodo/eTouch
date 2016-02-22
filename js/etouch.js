@@ -157,9 +157,9 @@
 		touchObj.distanceX = touches.pageX - touchObj.pageX;
 		touchObj.distanceY = touches.pageY - touchObj.pageY;
 		/*
-		* 以下是
-		* 手指划过微积分算法
-		* */
+		 * 以下是
+		 * 手指划过微积分算法
+		 * */
 		module.count++;
 		module.p = module.p + 0.5 * touchObj.distanceY * touchObj.distanceY / touchObj.distanceX;
 		var pAvg = module.p / module.count;
@@ -167,9 +167,12 @@
 
 		var targetH = target.h;
 		var targetW = target.w;
-		var targetS = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
-
-		//console.log(targetH,targetW);
+		var targetS = 0;
+		if((targetH / targetW) > 0.1405) { //触摸的元素宽高比问题,选择了tan8°做标准
+			targetS = (2/3) * (Math.abs(touchObj.distanceX) * targetW * 0.0197) * Math.sqrt( Math.abs(touchObj.distanceX) * targetW * 0.0197 );
+		} else {
+			targetS = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
+		}
 
 		/*
 		 * 以上是
