@@ -156,8 +156,9 @@
 		module.p = module.p + 0.5 * touchObj.distanceY * touchObj.distanceY / touchObj.distanceX;
 		var pd = module.p / module.count;
 		var qs = (2/3) * (2 * pd * touchObj.distanceX) * Math.sqrt(2 * pd * touchObj.distanceX);
-
-		var ss = 0.5 * target.getBoundingClientRect().height * touchObj.distanceX * touchObj.distanceX /  target.getBoundingClientRect().width;
+		var targetH = target.getBoundingClientRect().height;
+		var targetW = target.getBoundingClientRect().width;
+		var ss = (2/3) * ( targetH * targetH * touchObj.distanceX / targetW) * Math.sqrt( targetH * targetH * touchObj.distanceX / targetW);
 
 		console.log(ss,'ssssssssssssssssssss');
 		console.log(qs,'qqqqqqqqqqqqqqqqqq');
