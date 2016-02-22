@@ -9,7 +9,7 @@
     <link rel="stylesheet" touch="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" touch="text/css" href="stylesheets/github-light.css" media="screen">
     <link rel="stylesheet" touch="text/css" href="stylesheets/prism-okaidia.css"/>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
     <script src="js/etouch.js" touch="text/javascript" charset="utf-8"></script>
     <script src="js/prism.js" touch="text/javascript" charset="utf-8"></script>
     <style touch="text/css">
@@ -70,7 +70,7 @@
 <ul id="list">
     <li>
         <div>我是下层</div>
-        <p>item 1item 1item 1item 1item 1item 1item 1item 1item 1item 1item 1</p>
+        <p>item 1item 1item 1item 1item 1item 1item </p>
     </li>
     <li>
         <div>我是下层</div>
@@ -143,32 +143,66 @@
 
 </ul>
 <script>
+    var nowX = 0;
+    var flag = null;
+    var idx = null;
+    $("#list").on("touchstart", "p", function () {
+        idx = $(this).parent().index();
+    });
+    $("body").on("touchstart", function () {
+        var i = $("#list li p.on").parent().index();
+        $("#list p.on").removeClass('on');
+        $("#list p").eq(i).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .2s ease'});
+        setTimeout(function() {
+            $("#list p").eq(i).css({'-webkit-transition':'none'});
+        },210);
+    });
+    $("body").on("touchend", function () {
+        console.log(idx);
+        if(flag == 1) {
+            $("#list p").eq(idx).addClass('on');
+        } else if(flag == 2) {
+            $("#list p").eq(idx).removeClass('on');
+            $("#list p").eq(idx).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .2s ease'});
+            setTimeout(function() {
+                $("#list p").eq(idx).css({'-webkit-transition':'none'});
+            },210);
+        }
+    });
     etouch("#list", "p", function () {
     }).on('swiper',function(e,touch) {
         var _this = this;
-//        if (touch.distanceX < 0) {
+        if (touch.distanceX < 0) {
+            if(touch.distanceX < -30) {
+                flag = 1;
+            } else {
+                flag = 2;
+            }
             $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
-//        } else {
-//            $(_this).removeClass('on');
-//            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
-//            setTimeout(function() {
-//                $(_this).css({'-webkit-transition':'none'});
-//            },500)
-//        }
+        } else {
+            touch.distanceX > 15 ? touch.distanceX = 15 : touch.distanceX = touch.distanceX;
+            $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
+        }
+
     }).on('left',function(e,touch) {
         var _this = this;
-        /*if(Math.abs(touch.distanceX) > 30) {
+        console.log(touch);
+        if(flag == 1) {
             $(_this).addClass('on');
-        } else {
-            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .35s ease'});
+        } else if(flag == 2) {
+            $(_this).removeClass('on');
+            $(_this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .2s ease'});
             setTimeout(function() {
                 $(_this).css({'-webkit-transition':'none'});
-            },500)
-        }*/
+            },210);
+        }
+        flag = null;
     }).on('right',function(e,touch) {
-//        if(Math.abs(touch.distanceX) > 0) {
-//            $(this).removeClass('on');
-//        }
+        $(this).css({'-webkit-transform':'translate3d(0,0,0)','-webkit-transition':'all .2s cubic-bezier(0.66, 0.06, 0.43, 1.33)'});
+        setTimeout(function() {
+            $(this).css({'-webkit-transition':'none'});
+        },210);
+        flag = null;
     });
 </script>
 </body>
