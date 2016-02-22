@@ -77,7 +77,7 @@
 		this.target = {//当前点击的对象
 			el : null,
 			w : null,
-			height : null
+			h : null
 		};
 		this.touchObj = {
 			status: '',
@@ -110,8 +110,8 @@
 			_this = this;
 		delegate(this.root, 'touchstart', this.selector, function(e) {
 			_this.target.el = this; //存储点击对象是谁
-			_this.target.w = target.getBoundingClientRect().width;
-			_this.target.h = target.getBoundingClientRect().height;
+			_this.target.w = this.getBoundingClientRect().width;
+			_this.target.h = this.getBoundingClientRect().height;
 			touchStart(e, touchObj, _this);
 		});
 		delegate(this.root, 'touchmove', this.selector, function(e) {
@@ -125,7 +125,7 @@
 	eTouch.prototype.trigger = function(type, e) {
 		for (var i = 0; i < this.Event.length; i++) {
 			if (this.Event[i].type == type) {
-				this.Event[i].method.call(this.target,e, this.touchObj);
+				this.Event[i].method.call(this.target.el,e, this.touchObj);
 			}
 		}
 		return this;
@@ -167,8 +167,10 @@
 
 		var targetH = target.h;
 		var targetW = target.w;
-
 		var targetS = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
+
+		//console.log(targetH,targetW);
+
 		/*
 		 * 以上是
 		 * 手指划过微积分算法

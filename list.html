@@ -172,16 +172,16 @@
     etouch("#list", "p", function () {
     }).on('swiper',function(e,touch) {
         var _this = this;
-        console.log('-----');
         if (touch.distanceX < 0) {
             if(touch.distanceX < -30) {
                 flag = 1;
             } else {
                 flag = 2;
             }
+            console.log(_this);
             $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
         } else {
-            touch.distanceX > 15 ? touch.distanceX = 15 : touch.distanceX = touch.distanceX;
+            touch.distanceX > 15 ? touch.distanceX = 15 : touch.distanceX;
             $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
         }
 
