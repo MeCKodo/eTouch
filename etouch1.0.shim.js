@@ -167,9 +167,12 @@
 
         var targetH = target.h;
         var targetW = target.w;
-        var targetS = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
-
-        //console.log(targetH,targetW);
+        var targetS = 0;
+        if((targetH / targetW) > 0.1405) { //触摸的元素宽高比问题,选择了tan8°做标准
+            targetS = (2/3) * (Math.abs(touchObj.distanceX) * targetW * 0.0197) * Math.sqrt( Math.abs(touchObj.distanceX) * targetW * 0.0197 );
+        } else {
+            targetS = (2/3) * ( targetH * targetH * Math.abs(touchObj.distanceX) / targetW) * Math.sqrt( targetH * targetH * Math.abs(touchObj.distanceX) / targetW);
+        }
 
         /*
          * 以上是
@@ -214,8 +217,10 @@
         module.p = 0;
     }
 
+
     window.etouch = function(root, selector, fn) {
         return new eTouch(root, selector, fn);
     };
+
 
 })(window, undefined);
