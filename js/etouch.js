@@ -160,15 +160,11 @@
 		var targetW = target.getBoundingClientRect().width;
 		var ss = (2/3) * ( targetH * targetH * touchObj.distanceX / targetW) * Math.sqrt( targetH * targetH * touchObj.distanceX / targetW);
 
-		console.log(ss,'ssssssssssssssssssss');
-		console.log(qs,'qqqqqqqqqqqqqqqqqq');
-		if(qs > ss) {
-			console.log('----------------');
-		} else {
-			if (touchObj.status == 'swiper' && Math.abs(1/2 * touchObj.distanceY * touchObj.distanceX) < Math.abs(1/2 * touchObj.distanceX * touchObj.distanceX)) {
-				e.preventDefault();
-				module.trigger(touchObj.status, e, touchObj);
-			}
+		//console.log(ss,'ssssssssssssssssssss');
+		//console.log(qs,'qqqqqqqqqqqqqqqqqq');
+		if (touchObj.status == 'swiper' && qs < ss) {
+			e.preventDefault();
+			module.trigger(touchObj.status, e, touchObj);
 		}
 
 	}
