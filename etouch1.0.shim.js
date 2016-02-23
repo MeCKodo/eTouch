@@ -94,12 +94,18 @@
         this.Event = []; //存放上下左右滑的回调事件
         this.count = 0;
         this.p = 0;
+        this.clock = null; //给div加锁,完全阻止默认行为
         if (arguments[2] == undefined) {
             this.operate(arguments[1]);
+            if(String(arguments[1]).indexOf('e.clock') > 1)
+                this.clock = false;
         } else {
             this.operate(arguments[2]);
+            if(String(arguments[2]).indexOf('e.clock') > 1)
+                this.clock = false;
         }
     }
+
     eTouch.prototype.init = function() {
         this.touchObj.distanceX = 0;
         this.touchObj.distanceY = 0;
@@ -180,11 +186,14 @@
          * */
         //console.log(touchS,'手指曲线');
         //console.log(targetS,'目标曲线');
-        if (touchObj.status == 'swiper' && touchS < targetS) {
+        if(module.clock == false) {
             e.preventDefault();
             module.trigger(touchObj.status, e, touchObj);
         }
-
+        if (touchS < targetS ) {
+            e.preventDefault();
+            module.trigger(touchObj.status, e, touchObj);
+        }
     }
 
     function touchEnd(e, target, touchObj, module, fn) {
@@ -221,6 +230,5 @@
     window.etouch = function(root, selector, fn) {
         return new eTouch(root, selector, fn);
     };
-
 
 })(window, undefined);
