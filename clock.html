@@ -60,8 +60,7 @@
 <pre class="language-javascript">
 	<code>
 etouch("#pox",function(e,touch) {
-    console.log(touch);
-    return false; //当你想完全不触发任何浏览器默认行为 可以这样给div加个锁
+    e.clock = true;//当你想完全不触发任何浏览器默认行为 可以这样给div加个锁
 }).on('swiper',function(e,touch) {
     //实时获取
     console.log(touch);
