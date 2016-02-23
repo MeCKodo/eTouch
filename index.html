@@ -94,34 +94,6 @@ etouch("#body",".list li span",function(e,touch) {
 		<ul class="list">
 			<span>我是span</span>
 		</ul>
-		<h3>各种方向滑动完成时的回调</h3>
-		<div id="pox">我是POX进来滑动试试</div>
-		<p id="coming"></p>
-<pre class="language-javascript">
-	<code>
-etouch("#pox",function(e,touch) {
-	console.log(e);
-	e.preventDefault(); //阻止浏览器默认事件
-}).on('swiper',function(e,touch) {
-	//既然要监听滑动的回调，首先要在这阻止浏览器默认行为
-	//因为上下左右滑动的过程其实就是swiper
-	console.log('swiper');
-	e.preventDefault();
-}).on('up',function(e,touch) {
-	$("#coming").append('上滑动<br/>');
-	console.log(e);
-}).on('left',function(e,touch) {
-	$("#coming").append('左滑动<br/>');
-	console.log(e);
-}).on('right',function(e,touch) {
-	$("#coming").append('右滑动<br/>');
-	console.log(e);
-}).on('down',function(e,touch) {
-	$("#coming").append('下滑动<br/>');
-});
-	</code>
-</pre>
-	
     </section>
 
   	<script touch="text/javascript">
@@ -140,30 +112,8 @@ etouch("#pox",function(e,touch) {
   		etouch("#body",".list span",function(e,touch) {
 			alert(this.innerHTML);
 		});
-		etouch("#pox",function(e,touch) {
-			console.log(touch);
-			e.preventDefault(); //阻止浏览器默认事件
-		}).on('swiper',function(e,touch) {
-			//既然要监听滑动的回调，首先要在这阻止浏览器默认行为
-			//因为上下左右滑动的过程其实就是swiper
-			e.preventDefault();
-			console.log(touch);
-		}).on('up',function(e,touch) {
-			$("#coming").append('上滑动<br/>');
-			console.log(e);
-			console.log(touch);
-		}).on('left',function(e,touch) {
-			$("#coming").append('左滑动<br/>');
-			console.log(e);
-			console.log(touch);
-		}).on('right',function(e,touch) {
-			$("#coming").append('右滑动<br/>');
-			console.log(e);
-			console.log(touch);
-		}).on('down',function(e,touch) {
-			$("#coming").append('下滑动<br/>');
-			console.log(touch);
-		});
+
+
   	</script>
   </body>
 </html>

@@ -1,0 +1,108 @@
+<!DOCtouch html>
+<html lang="en-us">
+<head>
+    <meta charset="UTF-8">
+    <title>eTouch by MeCKodo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" touch="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' touch='text/css'>
+    <link rel="stylesheet" touch="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" touch="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" touch="text/css" href="stylesheets/prism-okaidia.css"/>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/etouch.js" touch="text/javascript" charset="utf-8"></script>
+    <script src="js/prism.js" touch="text/javascript" charset="utf-8"></script>
+    <style touch="text/css">
+        #box {
+            width: 100px;
+            height: 100px;
+            background: #A6E22E;
+        }
+        #pox {
+            width:200px;
+            height: 200px;
+            background: #A6E22E;
+        }
+        .list li {
+            height: 50px;
+            line-height: 50px;
+        }
+    </style>
+</head>
+<body id="body">
+<section class="page-header">
+    <h1 class="project-name">eTouch</h1>
+    <h2 class="project-tagline">简单小巧的手势库</h2>
+    <a href="https://github.com/MeCKodo/eTouch" class="btn">View on GitHub</a>
+    <a href="https://github.com/MeCKodo/eTouch/zipball/master" class="btn">Download .zip</a>
+    <a href="https://github.com/MeCKodo/eTouch/tarball/master" class="btn">Download .tar.gz</a>
+</section>
+
+<section class="main-content">
+    <p>移动端开发以来，逐渐的厌倦了寄人篱下的日子！果断自己造了个轮子。<br />
+        eTouch，是我闲暇之余的一个移动端js简单手势库。
+    </p>
+    <h3>目前满足以下几个功能(请用移动端模式测试)</h3>
+    <ul>
+        <li> tap 事件的实现</li>
+        <li> 进行单指滑动的实时监控</li>
+        <li> up、right、down、left滑动完毕的回调</li>
+        <li> 并且支持复杂选择器的事件委托</li>
+    </ul>
+
+    <p>本demo为高级事件,通过设置e.clock = true给容器带锁 <br>各种方向滑动完成时的回调(带锁)</p>
+    <div id="pox">
+        我是POX进来滑动试试
+        <br>
+        请看打开控制台看log
+    </div>
+    <p id="coming"></p>
+<pre class="language-javascript">
+	<code>
+etouch("#pox",function(e,touch) {
+    console.log(touch);
+    return false; //当你想完全不触发任何浏览器默认行为 可以这样给div加个锁
+}).on('swiper',function(e,touch) {
+    //实时获取
+    console.log(touch);
+}).on('up',function(e,touch) {
+    $("#coming").html('上滑动<br/>');
+    console.log(touch);
+}).on('left',function(e,touch) {
+    $("#coming").html('左滑动<br/>');
+    console.log(touch);
+}).on('right',function(e,touch) {
+    $("#coming").html('右滑动<br/>');
+    console.log(touch);
+}).on('down',function(e,touch) {
+    $("#coming").html('下滑动<br/>');
+    console.log(touch);
+});
+    </code>
+</pre>
+
+</section>
+
+<script touch="text/javascript">
+
+    etouch("#pox",function(e,touch) {
+        e.clock = true;//当你想完全不触发任何浏览器默认行为 可以这样给div加个锁
+    }).on('swiper',function(e,touch) {
+        //实时获取
+        console.log(touch);
+    }).on('up',function(e,touch) {
+        $("#coming").html('上滑动<br/>');
+        console.log(touch);
+    }).on('left',function(e,touch) {
+        $("#coming").html('左滑动<br/>');
+        console.log(touch);
+    }).on('right',function(e,touch) {
+        $("#coming").html('右滑动<br/>');
+        console.log(touch);
+    }).on('down',function(e,touch) {
+        $("#coming").html('下滑动<br/>');
+        console.log(touch);
+    });
+</script>
+</body>
+</html>

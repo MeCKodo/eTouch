@@ -181,7 +181,6 @@
             } else {
                 flag = 2;
             }
-            console.log(_this);
             $(_this).css("-webkit-transform",'translate3d('+ touch.distanceX +'px,0,0)');
         } else {
             touch.distanceX > 15 ? touch.distanceX = 15 : touch.distanceX;
@@ -190,7 +189,6 @@
 
     }).on('left',function(e,touch) {
         var _this = this;
-        console.log(touch);
         if(flag == 1) {
             $(_this).addClass('on');
         } else if(flag == 2) {
