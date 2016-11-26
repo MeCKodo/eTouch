@@ -3,6 +3,7 @@
 具备功能 tap手势，实时监控滑动距离，支持链式的上下左右滑回调
 
 > * 2016/2/22  重大更新, 为了精确预判用户行为,通过手指划过的曲线面积,使用`微积分`算法,极大提高精确度
+> * 感谢 [Appian](https://github.com/AppianZ) 提供的算法
 
  [普通示例地址!戳我戳我戳我](http://meckodo.github.io/eTouch/index.html) 15-10-27
 
@@ -57,4 +58,4 @@ require(['etouch'],function(etouch) {
 
 ```
 
-> * 感谢 ![Appian](https://github.com/AppianZ) 提供的算法
+
