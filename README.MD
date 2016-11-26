@@ -57,4 +57,4 @@ require(['etouch'],function(etouch) {
 
 ```
 
-> * 为了可以帮助到更多的人，请给予您的star
+> * 感谢 ![Appian](https://github.com/AppianZ) 提供的算法
