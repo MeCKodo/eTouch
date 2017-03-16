@@ -209,7 +209,7 @@
         touchObj.status = swipeDirection(x1, x2, y1, y2);
 
         //当手指触摸时间＜150和位移小于2px则为tap事件
-        if (time < 150 && Math.abs(touchObj.distanceX) < 2 && Math.abs(touchObj.distanceY) < 2) {
+        if (time < 150 && Math.abs(touchObj.distanceX) < 30 && Math.abs(touchObj.distanceY) < 30) {
             module.isTap = true;
             if (module.isTap) {
                 touchObj.status = 'tap';
@@ -217,7 +217,7 @@
                 setTimeout(function() {
                     module.isTap = false;
                     fn.call(target, e, touchObj);
-                }, 30);
+                }, 150);
             }
         } else { //否则为滑动或者双击，双击暂不想做
             module.trigger(touchObj.status, e, touchObj);
